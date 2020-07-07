@@ -7,10 +7,10 @@ class PeliculasProvider{
 
   String _apiKey    = '3ceba6e90ad2d4a9ac8a5b127744a507';
   String _url       = 'api.themoviedb.org';
-  String _lenguage  = 'es-Es';
+  String _lenguage  = 'es-ES';
 
   Future <List<Pelicula>> getEnCines() async{
-    final url = Uri.https(_url, '3/movie_now_playing',{
+    final url = Uri.https(_url, '3/movie/now_playing',{
       'api_key': _apiKey,
       'lenguage': _lenguage
     });
@@ -18,8 +18,9 @@ class PeliculasProvider{
     final res = await http.get(url);
     final decodedData = json.decode(res.body);
     final peliculas = new Peliculas.fromJsonList(decodedData['results']);
+    
     return peliculas.items;
-    print(peliculas);
+    
   }
 
 
